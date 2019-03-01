@@ -28,7 +28,13 @@ Just take a look into the [examples](examples/) to see how to use the Communicat
     <td class="tg-0lax">void Initialize(uint32_t baud = 500000);</td>
     <td class="tg-0lax"><b>baud:</b> Speed in bits per second</td>
     <td class="tg-0lax">-</td>
-    <td class="tg-0lax">Initializes the CommunicationManager. Should be called in the setup() Method of your sketch</td>
+    <td class="tg-0lax">Initializes the CommunicationManager. Should be called in the setup() method of your sketch</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">void Update();</td>
+    <td class="tg-0lax">-</td>
+    <td class="tg-0lax">-</td>
+    <td class="tg-0lax">Call this function in the loop() method of your sketch</td>
   </tr>
   <tr>
     <td class="tg-0lax">bool Fire(unsigned int canId);</td>
