@@ -1,4 +1,5 @@
 
+
 # CommunicationManager
 The CommunicationManager provides a simple interface to communicate over CAN. It follows the Publisher-Subscriber pattern.
 A publisher is offering messages to all other network nodes. Subscribers can subscribe to messages which they are interested in.
@@ -64,3 +65,10 @@ Just take a look into the [examples](examples/) to see how to use the Communicat
     <td class="tg-0lax">Subscribes to a CAN message and writes the received payload into value. The flag gets set to '1' everytime a message was received</td>
   </tr>
 </table>
+
+**Cycle Time values:**
+- CYCLE_10 &nbsp;&nbsp;(10ms)
+- CYCLE_20 &nbsp;&nbsp;(20ms)
+- CYCLE_40 &nbsp;&nbsp;(40ms)
+- CYCLE_80 &nbsp;&nbsp;(80ms)
+- CYCLE_100 (100ms)
