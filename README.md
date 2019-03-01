@@ -8,7 +8,7 @@ The library is built on top of [FlexCAN](https://github.com/pawelsky/FlexCAN_Lib
 You need a teensy 3.2 board and a CAN transreceiver (e.g. SN65HVD230) to use this library.
 
 ## How to use this library
-Just take a look into the [examples](examples/) to see how to use the CommunicationManager class. Please keep in mind that the maximum message size is limited to 8 bytes.
+Just take a look into the [examples](examples/) to see how to use the CommunicationManager class. Please keep in mind that the maximum message size is limited to 8 bytes and that the messages are transported in MSB format on the physical layer.
 
 **Provided functions:**
 <table class="tg">
