@@ -7,7 +7,7 @@ A publisher is offering messages to all other network nodes. Subscribers can sub
 You need a teensy 3.2 board and a CAN transreceiver (e.g. SN65HVD230) to use this library.
 
 ## How to use this library
-Just take a look into the [examples](examples/) to see how to use the CommunicationManager class.
+Just take a look into the [examples](examples/) to see how to use the CommunicationManager class. Please keep in mind that the maximum message size is limited to 8 bytes.
 
 **Provided functions:**
 <table class="tg">
@@ -46,7 +46,7 @@ Just take a look into the [examples](examples/) to see how to use the Communicat
     <td class="tg-0lax"><b style="font-weight:bold">val:</b> Pointer to value<br><br>
 	<b style="font-weight:bold">bytes:</b> Number of bytes<br><br><b style="font-weight:bold">canId:</b> CAN Identifier<br><br>
 	<b style="font-weight:bold">txFlag:</b> Pointer to transmitted flag<br><br><b style="font-weight:bold">cycle:</b> Send cycletime<br><td class="tg-0lax">False if an error occured, otherwise true</td>
-    <td class="tg-0lax">Publishes value with the given CAN Identifier with specified cycle time. The flag gets set to '1' everytime value was sent</td>
+    <td class="tg-0lax">Publishes value with the given CAN Identifier with specified cycle time. The flag gets set to '1' everytime the value was sent</td>
   </tr>
   <tr>
     <td class="tg-0lax">bool Subscribe(void* val, unsigned int bytes, unsigned int canId, unsigned char* rxFlag);</td>
