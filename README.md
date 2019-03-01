@@ -2,6 +2,7 @@
 # CommunicationManager
 The CommunicationManager provides a simple interface to communicate over CAN. It follows the Publisher-Subscriber pattern.
 A publisher is offering messages to all other network nodes. Subscribers can subscribe to messages which they are interested in.
+The library is built on top of [FlexCAN](https://github.com/pawelsky/FlexCAN_Library).
 
 ## Required Hardware
 You need a teensy 3.2 board and a CAN transreceiver (e.g. SN65HVD230) to use this library.
