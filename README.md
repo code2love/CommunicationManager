@@ -27,7 +27,7 @@ Just take a look into the [examples](examples/) to see how to use the Communicat
   </tr>
   <tr>
     <td class="tg-0lax">void Initialize(uint32_t baud = 500000, COMMUNICATION_BYTE_ORDER byteOrder = ORDER_MSB);</td>
-    <td class="tg-0lax"><b>baud:</b> Speed in bits per second<br/><b>byteOrder:</b> Data byte order</td>
+    <td class="tg-0lax"><b>baud:</b> Speed in bits per second<br/><br/><b>byteOrder:</b> Data byte order</td>
     <td class="tg-0lax">-</td>
     <td class="tg-0lax">Initializes the CommunicationManager. Should be called in the setup() method of your sketch</td>
   </tr>
