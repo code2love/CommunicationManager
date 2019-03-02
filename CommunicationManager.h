@@ -16,7 +16,7 @@
    * Debug Macros and definitions
    */
 
- #define COMMUNICATION_DEBUG_MODE 1
+ #define COMMUNICATION_DEBUG_MODE 0
 
  #define COMMUNICATION_DEBUG_PRINT(...) if(1 == COMMUNICATION_DEBUG_MODE) Serial.print(__VA_ARGS__)
  #define COMMUNICATION_DEBUG_PRINTLN(...) if(1 == COMMUNICATION_DEBUG_MODE) Serial.println(__VA_ARGS__)
