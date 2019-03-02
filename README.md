@@ -9,7 +9,7 @@ The library is built on top of [FlexCAN](https://github.com/pawelsky/FlexCAN_Lib
 You need a teensy 3.2 board and a CAN transreceiver (e.g. SN65HVD230) to use this library.
 
 ## How to use this library
-Just take a look into the [examples](examples/) to see how to use the CommunicationManager class. Please keep in mind that the maximum message size is limited to 8 bytes and that the messages are transported in MSB format on the physical layer.
+Just take a look into the [examples](examples/) to see how to use the CommunicationManager class. Please keep in mind that the maximum message size is limited to 8 bytes.
 
 **Provided functions:**
 <table class="tg">
@@ -26,8 +26,8 @@ Just take a look into the [examples](examples/) to see how to use the Communicat
     <td class="tg-0lax"></td>
   </tr>
   <tr>
-    <td class="tg-0lax">void Initialize(uint32_t baud = 500000);</td>
-    <td class="tg-0lax"><b>baud:</b> Speed in bits per second</td>
+    <td class="tg-0lax">void Initialize(uint32_t baud = 500000, COMMUNICATION_BYTE_ORDER byteOrder = ORDER_MSB);</td>
+    <td class="tg-0lax"><b>baud:</b> Speed in bits per second<br/><b>byteOrder:</b> Data byte order</td>
     <td class="tg-0lax">-</td>
     <td class="tg-0lax">Initializes the CommunicationManager. Should be called in the setup() method of your sketch</td>
   </tr>
@@ -65,6 +65,10 @@ Just take a look into the [examples](examples/) to see how to use the Communicat
     <td class="tg-0lax">Subscribes to a CAN message and writes the received payload into value. The flag gets set to '1' everytime a message was received</td>
   </tr>
 </table>
+
+**Byte Order values:**
+- ORDER_MSB
+- ORDER_LSB
 
 **Cycle Time values:**
 - CYCLE_10 &nbsp;&nbsp;(10ms)
