@@ -5,7 +5,7 @@
 
 #define CAN_ID 200
 
-#define LED_PIN 22
+#define LED_PIN 13
 
 uint16_t  sensorValue;
 uint8_t   rxFlagSensorValue;

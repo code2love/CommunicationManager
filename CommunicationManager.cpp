@@ -152,9 +152,20 @@ void CommunicationManager::Update() {
 		for (unsigned int i = 0; i < nConsumers; i++) {
 			if (consumers[i].canId == inId) {
 				unsigned char* outData = (uint8_t*)consumers[i].ref;
-				for (unsigned int n = 0; n < consumers[i].bytes; n++) {
-					outData[n] = inBuf[n];
+				unsigned int bytes = consumers[i].bytes;
+
+				// Restore byte order
+				if(ORDER_MSB == byteOrder) {
+					for(unsigned int n=0; n<bytes; n++) {
+						outData[(bytes-1)-n] = inBuf[n];
+					}
 				}
+				else {
+					for(unsigned int n=0; n<bytes; n++) {
+						outData[n] = inBuf[n];
+					}
+				}
+
 				// Indicate arrival of a message
 				*(consumers[i].rxFlag) = 1;
 			}
@@ -206,7 +217,22 @@ void CommunicationManager::Update() {
 		unsigned int outId = producer.canId;
 		unsigned char* data = producer.ref;
 		unsigned char bytes = producer.bytes;
-		if (SendCanMessage(outId, data, bytes)) {
+		uint8_t dataOut[8];
+
+		// Restore byte order
+		if(ORDER_MSB == byteOrder) {
+			for(uint8_t i=0; i<bytes; i++) {
+				dataOut[(bytes-1)-i] = data[i];
+			}
+		}
+		else {
+			for(uint8_t i=0; i<bytes; i++) {
+				dataOut[i] = data[i];
+			}
+		}
+
+		// Send data
+		if (SendCanMessage(outId, dataOut, bytes)) {
 			// Free storage
 			ListRemoveHead();
 		}
@@ -224,14 +250,14 @@ unsigned int CommunicationManager::GetMaxMessageUtilization() {
 }
 
 void CommunicationManager::InitCan(uint32_t baud) {
-#ifndef COMMUNICATION_TEST_ENV
+  #ifndef COMMUNICATION_TEST_ENV
 	CAN_Can0 = FlexCAN(baud);
 	//Set recive CAN_filter
 	CAN_filter.id = 0;
 	CAN_filter.ext = 0;
 	CAN_filter.rtr = 0;
 	CAN_Can0.begin(CAN_filter);
-#endif
+  #endif
 }
 
 int CommunicationManager::SendCanMessage(uint16_t msgID, uint8_t *data, uint8_t lengthOfData) {
@@ -250,14 +276,7 @@ int CommunicationManager::SendCanMessage(uint16_t msgID, uint8_t *data, uint8_t 
 		lengthOfData = 8;
 	}
 
-	if (ORDER_MSB == byteOrder) {
-		/* Daten im MSB Format in Frame schreiben */
-		for (i = 0; i < lengthOfData; i++)
-			CAN_outMsg.buf[i] = data[(lengthOfData - 1) - i];
-	}
-	else {
-		/* Daten im LSB Format in Frame schreiben */
-		for (i = 0; i < lengthOfData; i++)
+	for (i = 0; i < lengthOfData; i++) {
 			CAN_outMsg.buf[i] = data[i];
 	}
 
@@ -284,17 +303,9 @@ int CommunicationManager::ReceiveCanMessage(uint32_t *id, uint8_t *buf, int n) {
 	if (result) {
 		// Get id
 		*id = CAN_inMsg.id;
-		if (ORDER_MSB == byteOrder) {
-			// Copy data MSB to LSB
-			for (int i = 0; i < n; i++) {
-				buf[n - 1 - i] = CAN_inMsg.buf[i];
-			}
-		}
-		else {
-			// Copy data
-			for (int i = 0; i < n; i++) {
-				buf[i] = CAN_inMsg.buf[i];
-			}
+		// Copy data
+		for (int i = 0; i < n; i++) {
+			buf[i] = CAN_inMsg.buf[i];
 		}
 	}
 	return result;
